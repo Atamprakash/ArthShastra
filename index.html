@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ArthShastra – Learn Indian Economics in depth. CPI, Inflation, Budget, Fuel Prices, and more – explained clearly for students and UPSC aspirants." />
+  <title>ArthShastra – Indian Economics Learning Platform</title>
+
+  <!-- Google Fonts: DM Serif Display (elegant headings) + Plus Jakarta Sans (modern body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets (split for maintainability) -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       PAGE LOADER
+       Shows on first load, fades out after JS fires
+       ============================================================ -->
+  <div id="loader" role="status" aria-label="Loading ArthShastra">
+    <div class="loader-inner">
+      <div class="loader-emblem">
+        <div class="loader-ring"></div>
+        <div class="loader-ring loader-ring--2"></div>
+        <span class="loader-flag">🇮🇳</span>
+      </div>
+      <div class="loader-wordmark">Arth<span>Shastra</span></div>
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill" id="loaderBarFill"></div>
+      </div>
+      <p class="loader-tagline">India's Economy. Clearly Explained.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PARTICLE CANVAS (hero background effect)
+       Drawn via canvas API in main.js
+       ============================================================ -->
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       Fixed top navbar with smooth-scroll links
+       ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" aria-label="ArthShastra Home">
+        <div class="logo-icon">₹</div>
+        Arth<span>Shastra</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#cpi" class="nav-link">CPI & Inflation</a></li>
+        <li><a href="#calculator" class="nav-link">CPI Calculator</a></li>
+        <li><a href="#fuel" class="nav-link">Fuel Impact</a></li>
+        <li><a href="#budget" class="nav-link">Union Budget</a></li>
+        <li><a href="#quiz" class="nav-link nav-link--cta">Take Quiz</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-label="Mobile navigation">
+      <a href="#cpi"        class="drawer-link" onclick="closeDrawer()">📊 CPI & Inflation</a>
+      <a href="#calculator" class="drawer-link" onclick="closeDrawer()">🧮 CPI Calculator</a>
+      <a href="#fuel"       class="drawer-link" onclick="closeDrawer()">⛽ Fuel Impact</a>
+      <a href="#budget"     class="drawer-link" onclick="closeDrawer()">💰 Union Budget</a>
+      <a href="#quiz"       class="drawer-link" onclick="closeDrawer()">🧠 Take Quiz</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SECTION 0: HERO
+       Animated gradient + particle canvas backdrop
+       ============================================================ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-glow hero-glow--1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow--2" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow--3" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <!-- Floating stat badges -->
+      <div class="hero-stats" aria-hidden="true">
+        <div class="stat-badge stat-badge--1">
+          <span class="sb-label">CPI Inflation</span>
+          <span class="sb-value">4.83%</span>
+          <span class="sb-sub">Mar 2025</span>
+        </div>
+        <div class="stat-badge stat-badge--2">
+          <span class="sb-label">Repo Rate</span>
+          <span class="sb-value">6.25%</span>
+          <span class="sb-sub">RBI 2025</span>
+        </div>
+        <div class="stat-badge stat-badge--3">
+          <span class="sb-label">Fiscal Deficit</span>
+          <span class="sb-value">4.9%</span>
+          <span class="sb-sub">of GDP</span>
+        </div>
+      </div>
+
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Designed for Class 11–12 Students & UPSC Aspirants
+        <span class="eyebrow-dot"></span>
+      </div>
+
+      <h1 class="hero-title">
+        Understanding<br>
+        <em class="hero-title-em">Indian Economy</em><br>
+        <span class="hero-title-outline">Clearly & Deeply</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        From CPI calculations to Union Budget analysis — master the fundamental
+        concepts of India's macroeconomic framework with interactive tools,
+        real data, and structured explanations.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#cpi" class="btn btn-primary">
+          <span class="btn-text">Start Learning</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="#calculator" class="btn btn-secondary">
+          <span class="btn-icon">🧮</span>
+          <span class="btn-text">Try CPI Calculator</span>
+        </a>
+      </div>
+
+      <!-- Topic chips -->
+      <div class="hero-chips" aria-label="Topics covered">
+        <span class="chip">CPI</span>
+        <span class="chip">WPI</span>
+        <span class="chip">Repo Rate</span>
+        <span class="chip">Fiscal Deficit</span>
+        <span class="chip">Inflation Types</span>
+        <span class="chip">Union Budget</span>
+        <span class="chip">Monetary Policy</span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 1: CPI & INFLATION (In-depth)
+       ============================================================ -->
+  <section id="cpi" aria-labelledby="cpi-title">
+    <div class="section-container">
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-pill">📊 Foundation Concepts</span>
+        </div>
+        <h2 class="section-title" id="cpi-title">
+          Consumer Price Index &<br><span class="title-accent">Inflation — A Deep Dive</span>
+        </h2>
+        <p class="section-description">
+          The Consumer Price Index (CPI) is the primary benchmark used by the Government of India
+          and the Reserve Bank of India to measure the rate of change in prices of a representative
+          basket of goods and services consumed by households. Understanding CPI is essential for
+          grasping how inflation affects purchasing power, monetary policy, and economic well-being.
+        </p>
+      </div>
+
+      <!-- Core concept cards -->
+      <div class="concept-grid">
+        <div class="concept-card c-saffron reveal reveal-d1">
+          <div class="cc-icon-wrap cc-icon-wrap--saffron">
+            <span class="cc-icon">🧺</span>
+          </div>
+          <h3 class="cc-title">What is CPI?</h3>
+          <p class="cc-body">
+            CPI measures the weighted average price of a fixed basket of consumer goods across
+            urban and rural households. India's CPI is compiled by the <strong>Ministry of
+            Statistics & Programme Implementation (MoSPI)</strong> and tracks ~299 items across
+            6 major sub-groups. Base year is currently <strong>2012 = 100</strong>.
+          </p>
+          <div class="cc-formula">
+            CPI = (Cost of Basket in Current Year ÷ Cost of Basket in Base Year) × 100
+          </div>
+        </div>
+
+        <div class="concept-card c-gold reveal reveal-d2">
+          <div class="cc-icon-wrap cc-icon-wrap--gold">
+            <span class="cc-icon">📈</span>
+          </div>
+          <h3 class="cc-title">Inflation Rate</h3>
+          <p class="cc-body">
+            Inflation is the <strong>rate of change</strong> in CPI over a period — typically measured
+            year-on-year (YoY). When CPI rises from 160 to 168 in a year, the inflation rate is
+            5%. This means ₹100 worth of goods last year now costs ₹105, reducing your
+            <em>real purchasing power</em> by 5%.
+          </p>
+          <div class="cc-formula">
+            Inflation (%) = [(CPI<sub>current</sub> − CPI<sub>previous</sub>) ÷ CPI<sub>previous</sub>] × 100
+          </div>
+        </div>
+
+        <div class="concept-card c-emerald reveal reveal-d3">
+          <div class="cc-icon-wrap cc-icon-wrap--emerald">
+            <span class="cc-icon">🏦</span>
+          </div>
+          <h3 class="cc-title">RBI's Monetary Policy</h3>
+          <p class="cc-body">
+            Under the <strong>Inflation Targeting Framework</strong> (adopted in 2016), the RBI
+            Monetary Policy Committee (MPC) is legally mandated to maintain CPI inflation at
+            <strong>4% ± 2%</strong>. If inflation exceeds 6% for three consecutive quarters,
+            RBI must submit a written explanation to the government — a major accountability mechanism.
+          </p>
+          <div class="cc-formula">
+            Target: 4% (Band: 2%–6%) | Mandate: RBI Act, 1934 (Amended 2016)
+          </div>
+        </div>
+
+        <div class="concept-card c-blue reveal reveal-d4">
+          <div class="cc-icon-wrap cc-icon-wrap--blue">
+            <span class="cc-icon">⚖️</span>
+          </div>
+          <h3 class="cc-title">CPI vs WPI: Key Difference</h3>
+          <p class="cc-body">
+            <strong>CPI</strong> measures prices at the retail/consumer level — what you pay at
+            a shop. <strong>WPI (Wholesale Price Index)</strong> measures prices at the
+            producer/wholesale level — factory gates and warehouses. CPI reflects consumer
+            burden; WPI reflects production cost pressures. India uses CPI (Combined) as the
+            primary inflation benchmark for monetary policy since 2014.
+          </p>
+          <div class="cc-formula">
+            CPI → Consumer end | WPI → Producer end | GDP Deflator → Economy-wide
+          </div>
+        </div>
+      </div>
+
+      <!-- CPI Basket Weights Visualiser -->
+      <div class="basket-section reveal">
+        <div class="basket-header">
+          <h3 class="basket-title">India's CPI Basket — Category Weights (2012 Base)</h3>
+          <p class="basket-sub">
+            Each category has a pre-assigned weight reflecting its importance in an average
+            Indian household's expenditure. Food & Beverages holds the highest weight at ~45.86%.
+          </p>
+        </div>
+        <div class="basket-weights">
+          <!-- Weights rendered by calculator.js -->
+          <div class="weight-row" data-cat="Food & Beverages" data-w="45.86" data-color="#FF6B2B">
+            <div class="wr-meta">
+              <span class="wr-icon">🌾</span>
+              <span class="wr-name">Food &amp; Beverages</span>
+              <span class="wr-pct">45.86%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:45.86;background:#FF6B2B"></div></div>
+            <span class="wr-note">Cereals, pulses, vegetables, milk, meat, spices</span>
+          </div>
+          <div class="weight-row" data-cat="Miscellaneous" data-w="28.32" data-color="#3BAFDA">
+            <div class="wr-meta">
+              <span class="wr-icon">📦</span>
+              <span class="wr-name">Miscellaneous</span>
+              <span class="wr-pct">28.32%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:28.32;background:#3BAFDA"></div></div>
+            <span class="wr-note">Education, health, transport, recreation, personal care</span>
+          </div>
+          <div class="weight-row" data-cat="Housing" data-w="10.07" data-color="#00D9A5">
+            <div class="wr-meta">
+              <span class="wr-icon">🏠</span>
+              <span class="wr-name">Housing</span>
+              <span class="wr-pct">10.07%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:10.07;background:#00D9A5"></div></div>
+            <span class="wr-note">Rent, maintenance (Urban CPI only)</span>
+          </div>
+          <div class="weight-row" data-cat="Fuel & Light" data-w="6.84" data-color="#F5B742">
+            <div class="wr-meta">
+              <span class="wr-icon">⛽</span>
+              <span class="wr-name">Fuel &amp; Light</span>
+              <span class="wr-pct">6.84%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:6.84;background:#F5B742"></div></div>
+            <span class="wr-note">LPG, kerosene, firewood, chips, dung cake</span>
+          </div>
+          <div class="weight-row" data-cat="Clothing & Footwear" data-w="6.53" data-color="#a78bfa">
+            <div class="wr-meta">
+              <span class="wr-icon">👕</span>
+              <span class="wr-name">Clothing &amp; Footwear</span>
+              <span class="wr-pct">6.53%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:6.53;background:#a78bfa"></div></div>
+            <span class="wr-note">Garments, bedding, footwear, tailoring</span>
+          </div>
+          <div class="weight-row" data-cat="Pan, Tobacco & Intoxicants" data-w="2.38" data-color="#fb7185">
+            <div class="wr-meta">
+              <span class="wr-icon">🚭</span>
+              <span class="wr-name">Pan, Tobacco &amp; Intoxicants</span>
+              <span class="wr-pct">2.38%</span>
+            </div>
+            <div class="wr-bar-track"><div class="wr-bar" style="--w:2.38;background:#fb7185"></div></div>
+            <span class="wr-note">Bidis, cigarettes, pan masala, country liquor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inflation Types -->
+      <div class="reveal" style="margin-top:60px">
+        <h3 class="sub-section-title">Types of Inflation — An Overview</h3>
+        <div class="types-grid">
+          <div class="type-card reveal reveal-d1">
+            <div class="tc-badge" style="background:rgba(255,107,43,0.15);color:#FF6B2B">Demand-Pull</div>
+            <h4>Demand-Pull Inflation</h4>
+            <p>Occurs when aggregate demand in an economy exceeds aggregate supply. Classic scenario: government spending surges, consumers have more money, but production hasn't scaled — "too much money chasing too few goods." Common during economic booms.</p>
+            <div class="tc-example">Example: Post-COVID spending surge (2021–22)</div>
+          </div>
+          <div class="type-card reveal reveal-d2">
+            <div class="tc-badge" style="background:rgba(245,183,66,0.15);color:#F5B742">Cost-Push</div>
+            <h4>Cost-Push Inflation</h4>
+            <p>Triggered when production costs rise — raw materials, energy, wages — forcing producers to raise prices. India frequently experiences this via oil price shocks and monsoon failures affecting food supply. Not easily controlled by monetary policy alone.</p>
+            <div class="tc-example">Example: Crude oil shock → fuel → freight → food prices</div>
+          </div>
+          <div class="type-card reveal reveal-d3">
+            <div class="tc-badge" style="background:rgba(0,217,165,0.15);color:#00D9A5">Built-In</div>
+            <h4>Built-In (Wage-Price) Inflation</h4>
+            <p>A self-fulfilling cycle: workers expect inflation and demand higher wages; higher wages increase production costs; businesses raise prices to compensate; repeat. Also called "wage-price spiral." Hardest to break without significant monetary tightening.</p>
+            <div class="tc-example">Example: Inflationary expectations entrenched in wage negotiations</div>
+          </div>
+          <div class="type-card reveal reveal-d4">
+            <div class="tc-badge" style="background:rgba(59,175,218,0.15);color:#3BAFDA">Structural</div>
+            <h4>Structural Inflation</h4>
+            <p>Arises from structural deficiencies in an economy — poor supply chains, inadequate storage, land fragmentation, regulatory bottlenecks. Particularly relevant in India's agriculture sector where post-harvest losses can exceed 25%, creating artificial scarcity.</p>
+            <div class="tc-example">Example: Onion/tomato price spikes due to supply chain gaps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2: CPI CALCULATOR (Interactive Tool)
+       Logic in js/calculator.js
+       ============================================================ -->
+  <section id="calculator" aria-labelledby="calc-title" class="section-dark">
+    <div class="section-container">
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-pill eyebrow-pill--dark">🧮 Interactive Tool</span>
+        </div>
+        <h2 class="section-title section-title--light" id="calc-title">
+          Build Your Own<br><span class="title-accent">CPI Calculator</span>
+        </h2>
+        <p class="section-description section-description--light">
+          Adjust the current prices of goods relative to the base year (set at ₹100 for each
+          category). The calculator computes a weighted CPI and the resulting inflation rate in
+          real time, giving you an intuitive understanding of how price changes affect the index.
+        </p>
+      </div>
+
+      <div class="calc-layout">
+        <!-- Left: sliders -->
+        <div class="calc-inputs-panel reveal">
+          <div class="calc-panel-header">
+            <h3>Adjust Prices</h3>
+            <p>Base Year Price = ₹100 for each category</p>
+            <button class="btn-reset" id="calcResetBtn" onclick="resetCalculator()">↺ Reset</button>
+          </div>
+
+          <div class="calc-rows" id="calcRows">
+            <!-- Dynamically injected by calculator.js -->
+          </div>
+        </div>
+
+        <!-- Right: result panel -->
+        <div class="calc-result-panel reveal reveal-d2">
+          <!-- CPI Gauge -->
+          <div class="gauge-wrapper">
+            <svg class="gauge-svg" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg" aria-label="CPI Inflation Gauge">
+              <!-- Background arc -->
+              <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-linecap="round"/>
+              <!-- Coloured arc segments -->
+              <path id="gaugeArcLow"  d="M 20 110 A 90 90 0 0 1 67 34"   fill="none" stroke="#00D9A5" stroke-width="14" stroke-linecap="round" opacity="0.3"/>
+              <path id="gaugeArcMid"  d="M 67 34  A 90 90 0 0 1 153 34"   fill="none" stroke="#F5B742" stroke-width="14" stroke-linecap="round" opacity="0.3"/>
+              <path id="gaugeArcHigh" d="M 153 34 A 90 90 0 0 1 200 110"  fill="none" stroke="#FF6B2B" stroke-width="14" stroke-linecap="round" opacity="0.3"/>
+              <!-- Active arc -->
+              <path id="gaugeActive" d="M 20 110 A 90 90 0 0 1 20 110" fill="none" stroke="#00D9A5" stroke-width="14" stroke-linecap="round" class="gauge-active-arc"/>
+              <!-- Needle -->
+              <line id="gaugeNeedle" x1="110" y1="110" x2="110" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round" transform="rotate(0 110 110)" class="gauge-needle"/>
+              <circle cx="110" cy="110" r="6" fill="white"/>
+              <!-- Labels -->
+              <text x="14"  y="125" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Plus Jakarta Sans,sans-serif">Low</text>
+              <text x="95"  y="18"  font-size="9" fill="rgba(255,255,255,0.4)" font-family="Plus Jakarta Sans,sans-serif">Target</text>
+              <text x="190" y="125" font-size="9" fill="rgba(255,255,255,0.4)" font-family="Plus Jakarta Sans,sans-serif" text-anchor="end">High</text>
+            </svg>
+
+            <div class="gauge-cpi-display">
+              <span class="gauge-cpi-label">CPI Index</span>
+              <span class="gauge-cpi-value" id="cpiValue">100.00</span>
+            </div>
+          </div>
+
+          <!-- Inflation result -->
+          <div class="result-card" id="resultCard">
+            <div class="rc-row">
+              <span class="rc-label">Inflation Rate</span>
+              <span class="rc-value" id="inflationRate">0.00%</span>
+            </div>
+            <div class="rc-row">
+              <span class="rc-label">Status</span>
+              <span class="rc-status" id="inflationStatus">Stable</span>
+            </div>
+            <div class="rc-row">
+              <span class="rc-label">RBI Response Likely</span>
+              <span class="rc-response" id="rbiResponse">No action needed</span>
+            </div>
+            <div class="rc-interpretation" id="calcInterpretation">
+              Set a base CPI of 100. Your calculated CPI and inflation rate will appear here as you adjust the sliders above.
+            </div>
+          </div>
+
+          <!-- Category contribution bars -->
+          <div class="contribution-section">
+            <h4 class="contrib-title">Category Contributions to CPI</h4>
+            <div class="contrib-bars" id="contribBars">
+              <!-- Injected by calculator.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works note -->
+      <div class="calc-explainer reveal">
+        <div class="explainer-icon">💡</div>
+        <div class="explainer-body">
+          <strong>How the calculation works:</strong> Each category has an official weight (e.g., Food = 45.86%).
+          Your input price is divided by the base price (₹100) to get a price ratio. This ratio is then
+          multiplied by the category weight. The sum of all weighted ratios × 100 gives the CPI.
+          Inflation = (CPI − 100) / 100 × 100%. This mirrors the exact methodology used by MoSPI.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3: FUEL PRICE HIKE — CHAIN EFFECT
+       ============================================================ -->
+  <section id="fuel" aria-labelledby="fuel-title">
+    <div class="section-container">
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-pill">⛽ Case Study</span>
+        </div>
+        <h2 class="section-title" id="fuel-title">
+          Fuel Price Hike:<br><span class="title-accent">The Macroeconomic Chain Reaction</span>
+        </h2>
+        <p class="section-description">
+          A rise in petroleum prices is one of the most potent triggers of cost-push inflation
+          in a developing economy like India. Because fuel is an input cost across virtually every
+          sector — agriculture, manufacturing, logistics, and services — its price transmission
+          effect is both swift and wide-ranging.
+        </p>
+      </div>
+
+      <!-- Data banner -->
+      <div class="data-banner reveal">
+        <div class="db-item">
+          <span class="db-label">India's Oil Import Dependency</span>
+          <span class="db-value">~85%</span>
+        </div>
+        <div class="db-divider"></div>
+        <div class="db-item">
+          <span class="db-label">Crude Oil in Import Bill</span>
+          <span class="db-value">~22%</span>
+        </div>
+        <div class="db-divider"></div>
+        <div class="db-item">
+          <span class="db-label">Fuel Weight in CPI</span>
+          <span class="db-value">6.84%</span>
+        </div>
+        <div class="db-divider"></div>
+        <div class="db-item">
+          <span class="db-label">Indirect Fuel Impact on CPI</span>
+          <span class="db-value">~30%+</span>
+        </div>
+      </div>
+
+      <!-- Chain reaction timeline -->
+      <div class="timeline reveal">
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <div class="timeline-step reveal reveal-d1">
+          <div class="ts-node ts-node--saffron">
+            <span>⛽</span>
+          </div>
+          <div class="ts-card">
+            <div class="ts-step-label">Stage 1 — Origin</div>
+            <h4>International Crude Oil Price Rise</h4>
+            <p>
+              India imports ~85% of its crude oil needs. When Brent crude rises on global markets
+              (due to OPEC+ cuts, geopolitical conflict, or USD appreciation), the cost of India's
+              oil import bill increases sharply. India is a price-taker — it cannot influence global
+              crude prices. The rupee's depreciation further amplifies the cost since crude is priced in USD.
+            </p>
+            <div class="ts-data-tag">
+              Brent Crude Impact: Every $10/barrel increase ≈ ₹1 lakh crore added to India's import bill
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal reveal-d2">
+          <div class="ts-node ts-node--gold">
+            <span>🏭</span>
+          </div>
+          <div class="ts-card">
+            <div class="ts-step-label">Stage 2 — Refinery & Distribution</div>
+            <h4>Cost Absorption by OMCs / Retail Price Revision</h4>
+            <p>
+              Oil Marketing Companies (OMCs) — Indian Oil, BPCL, HPCL — either absorb losses
+              (leading to "under-recoveries") or pass costs to consumers via retail price revisions.
+              The government may partially cushion the impact through excise duty cuts or subsidies,
+              but this creates a fiscal burden. When prices are revised upward, it directly enters
+              the CPI's "Fuel & Light" and transport sub-indices.
+            </p>
+            <div class="ts-data-tag">
+              Petrol: ₹72/L (2020) → ₹106/L (2022) — a 47% increase over 2 years
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal reveal-d3">
+          <div class="ts-node ts-node--blue">
+            <span>🚛</span>
+          </div>
+          <div class="ts-card">
+            <div class="ts-step-label">Stage 3 — Logistics & Supply Chain</div>
+            <h4>Transportation Cost Surge — Freight Rate Hike</h4>
+            <p>
+              Diesel powers >95% of India's freight movement. A diesel price hike immediately
+              raises the cost per kilometre for road transport. Transporters pass this cost onto
+              shippers as higher freight rates. This cost cascades through the supply chain —
+              manufacturers, wholesalers, and retailers each add a margin, causing a multiplier
+              effect on final product prices.
+            </p>
+            <div class="ts-data-tag">
+              A 10% diesel hike → ~3–5% increase in road freight rates (IFFCO-Tokio estimates)
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal reveal-d4">
+          <div class="ts-node ts-node--red">
+            <span>🛒</span>
+          </div>
+          <div class="ts-card">
+            <div class="ts-step-label">Stage 4 — Consumer Market</div>
+            <h4>Retail Price Escalation — Broad-Based Inflation</h4>
+            <p>
+              Higher transport costs feed into prices of food, FMCG, electronics, and construction
+              materials. Since food has the highest CPI weight (45.86%), even a modest rise in
+              agricultural commodity transport costs causes notable CPI movement. This is "core CPI
+              inflation" being driven by supply-side pressure — a textbook case of cost-push inflation.
+            </p>
+            <div class="ts-data-tag">
+              Food inflation rose to 8.7% in Dec 2023 — partly fuel-driven freight costs
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal reveal-d4">
+          <div class="ts-node ts-node--emerald">
+            <span>🏦</span>
+          </div>
+          <div class="ts-card">
+            <div class="ts-step-label">Stage 5 — Policy Response</div>
+            <h4>RBI's Monetary Tightening — Repo Rate Hike</h4>
+            <p>
+              When inflation breaches the upper tolerance band of 6%, the RBI's MPC votes to
+              raise the Repo Rate — the rate at which it lends to commercial banks. A higher
+              Repo Rate makes borrowing expensive: home loans, business credit, and consumer
+              credit all become costlier. This suppresses demand, reducing inflationary pressure
+              over time. However, this also slows GDP growth — a classic policy trade-off.
+            </p>
+            <div class="ts-data-tag">
+              RBI raised Repo Rate by 250 bps (2.5%) between May 2022 and Feb 2023
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Terms Glossary Strip -->
+      <div class="glossary-strip reveal">
+        <div class="gs-title">Key Terms from This Section</div>
+        <div class="gs-items">
+          <div class="gs-item">
+            <span class="gs-term">Repo Rate</span>
+            <span class="gs-def">Rate at which RBI lends to commercial banks (short-term)</span>
+          </div>
+          <div class="gs-item">
+            <span class="gs-term">Under-Recovery</span>
+            <span class="gs-def">Loss incurred by OMCs when retail price < actual cost</span>
+          </div>
+          <div class="gs-item">
+            <span class="gs-term">Core Inflation</span>
+            <span class="gs-def">CPI excluding food & fuel — reflects structural demand pressure</span>
+          </div>
+          <div class="gs-item">
+            <span class="gs-term">Brent Crude</span>
+            <span class="gs-def">Global oil benchmark; India prices imports relative to Brent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4: UNION BUDGET SIMPLIFIED
+       ============================================================ -->
+  <section id="budget" aria-labelledby="budget-title" class="section-dark">
+    <div class="section-container">
+
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-pill eyebrow-pill--dark">💰 Fiscal Policy</span>
+        </div>
+        <h2 class="section-title section-title--light" id="budget-title">
+          Union Budget of India:<br><span class="title-accent">Structure & Significance</span>
+        </h2>
+        <p class="section-description section-description--light">
+          The Union Budget, presented annually on <strong>February 1</strong> by the Finance
+          Minister, is the government's comprehensive financial statement — detailing its
+          income, expenditure plans, and economic priorities for the coming fiscal year
+          (April 1 to March 31). It is both a policy document and a legal mandate.
+        </p>
+      </div>
+
+      <!-- Budget structure visual -->
+      <div class="budget-layout">
+        <!-- Left column: Budget components -->
+        <div class="budget-components reveal">
+          <div class="bc-card bc-card--revenue">
+            <div class="bc-header">
+              <span class="bc-icon">📥</span>
+              <div>
+                <h3>Revenue Budget</h3>
+                <span class="bc-subtitle">Day-to-day income &amp; expenses</span>
+              </div>
+            </div>
+            <div class="bc-body">
+              <p>The Revenue Budget covers transactions that do not affect the government's asset or
+              liability position. It includes <strong>Revenue Receipts</strong> (taxes, dividends, interest)
+              and <strong>Revenue Expenditure</strong> (salaries, pensions, subsidies, interest payments).
+              A surplus here is ideal; a deficit adds to borrowings.</p>
+              <div class="bc-sources">
+                <div class="bc-source-item">
+                  <span class="bcs-label">Income Tax</span><span class="bcs-val">18%</span>
+                </div>
+                <div class="bc-source-item">
+                  <span class="bcs-label">GST</span><span class="bcs-val">27%</span>
+                </div>
+                <div class="bc-source-item">
+                  <span class="bcs-label">Corporate Tax</span><span class="bcs-val">17%</span>
+                </div>
+                <div class="bc-source-item">
+                  <span class="bcs-label">Customs</span><span class="bcs-val">5%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bc-card bc-card--capital">
+            <div class="bc-header">
+              <span class="bc-icon">🏗️</span>
+              <div>
+                <h3>Capital Budget</h3>
+                <span class="bc-subtitle">Long-term assets &amp; investments</span>
+              </div>
+            </div>
+            <div class="bc-body">
+              <p>The Capital Budget deals with transactions affecting the government's assets and
+              liabilities. <strong>Capital Receipts</strong> include borrowings and disinvestment.
+              <strong>Capital Expenditure</strong> (Capex) goes toward infrastructure — roads, railways,
+              defence equipment, and hospitals. Higher Capex creates a multiplier effect on GDP.</p>
+              <div class="bc-sources">
+                <div class="bc-source-item">
+                  <span class="bcs-label">Capex FY25</span><span class="bcs-val">₹11.11L Cr</span>
+                </div>
+                <div class="bc-source-item">
+                  <span class="bcs-label">vs FY24</span><span class="bcs-val">+16.9%</span>
+                </div>
+                <div class="bc-source-item">
+                  <span class="bcs-label">% of GDP</span><span class="bcs-val">3.4%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: Key metrics + pie -->
+        <div class="budget-metrics reveal reveal-d2">
+          <!-- Expenditure donut chart (SVG) -->
+          <div class="budget-donut-card">
+            <h4 class="bdc-title">Where the Money Goes (FY 2024–25)</h4>
+            <div class="donut-wrap">
+              <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" class="donut-chart-svg" aria-label="Budget Expenditure Breakdown">
+                <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="34"/>
+                <!-- Segments using stroke-dasharray on circumference 502.65 -->
+                <!-- Interest: 20% = 100.5 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#FF6B2B" stroke-width="34" stroke-dasharray="100.5 402.1" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+                <!-- Defence: 13% = 65.3 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#F5B742" stroke-width="34" stroke-dasharray="65.3 437.3" stroke-dashoffset="-100.5" transform="rotate(-90 110 110)"/>
+                <!-- Subsidies: 8% = 40.2 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#00D9A5" stroke-width="34" stroke-dasharray="40.2 462.4" stroke-dashoffset="-165.8" transform="rotate(-90 110 110)"/>
+                <!-- Infrastructure: 20% = 100.5 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#3BAFDA" stroke-width="34" stroke-dasharray="100.5 402.1" stroke-dashoffset="-206" transform="rotate(-90 110 110)"/>
+                <!-- Rural/Social: 10% = 50.3 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="#a78bfa" stroke-width="34" stroke-dasharray="50.3 452.4" stroke-dashoffset="-306.5" transform="rotate(-90 110 110)"/>
+                <!-- Others: 29% = 145.8 -->
+                <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="34" stroke-dasharray="145.8 357.0" stroke-dashoffset="-356.8" transform="rotate(-90 110 110)"/>
+                <text x="110" y="104" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="white">Budget</text>
+                <text x="110" y="122" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">FY 2024–25</text>
+              </svg>
+              <div class="donut-legend">
+                <div class="dl-item"><span class="dl-dot" style="background:#FF6B2B"></span><span>Interest Payments</span><span class="dl-pct">20%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#F5B742"></span><span>Defence</span><span class="dl-pct">13%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#00D9A5"></span><span>Subsidies</span><span class="dl-pct">8%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#3BAFDA"></span><span>Infrastructure</span><span class="dl-pct">20%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:#a78bfa"></span><span>Rural &amp; Social</span><span class="dl-pct">10%</span></div>
+                <div class="dl-item"><span class="dl-dot" style="background:rgba(255,255,255,0.2)"></span><span>Others</span><span class="dl-pct">29%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key fiscal metrics -->
+          <div class="fiscal-metrics">
+            <div class="fm-item reveal reveal-d1">
+              <div class="fm-label">Fiscal Deficit (FY25 Target)</div>
+              <div class="fm-value">4.9% <span class="fm-unit">of GDP</span></div>
+              <div class="fm-bar-track"><div class="fm-bar" style="width:81.6%;background:linear-gradient(90deg,#FF6B2B,#F5B742)"></div></div>
+              <div class="fm-note">FRBM Medium-term target: 3% of GDP</div>
+            </div>
+            <div class="fm-item reveal reveal-d2">
+              <div class="fm-label">Revenue Deficit (FY25)</div>
+              <div class="fm-value">2.0% <span class="fm-unit">of GDP</span></div>
+              <div class="fm-bar-track"><div class="fm-bar" style="width:40%;background:linear-gradient(90deg,#F5B742,#00D9A5)"></div></div>
+            </div>
+            <div class="fm-item reveal reveal-d3">
+              <div class="fm-label">Capital Expenditure</div>
+              <div class="fm-value">₹11.11L Cr</div>
+              <div class="fm-bar-track"><div class="fm-bar" style="width:70%;background:linear-gradient(90deg,#00D9A5,#3BAFDA)"></div></div>
+              <div class="fm-note">3.4% of GDP — highest in recent history</div>
+            </div>
+            <div class="fm-item reveal reveal-d4">
+              <div class="fm-label">Tax-to-GDP Ratio</div>
+              <div class="fm-value">11.7% <span class="fm-unit">of GDP</span></div>
+              <div class="fm-bar-track"><div class="fm-bar" style="width:58.5%;background:linear-gradient(90deg,#3BAFDA,#a78bfa)"></div></div>
+              <div class="fm-note">Global avg: ~15%. India has room to improve</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRBM Act highlight box -->
+      <div class="highlight-box reveal">
+        <div class="hb-icon">⚖️</div>
+        <div class="hb-body">
+          <h4>Fiscal Responsibility and Budget Management (FRBM) Act, 2003</h4>
+          <p>
+            The FRBM Act mandates fiscal discipline by setting targets for reducing fiscal deficit
+            to 3% of GDP and eliminating the revenue deficit. It requires the government to present
+            a <em>Medium-Term Fiscal Policy Statement</em> and a <em>Fiscal Policy Strategy
+            Statement</em> alongside the budget. The NK Singh Committee (2017) recommended a
+            "Fiscal Council" to monitor compliance independently. During crises (COVID-19), the
+            "escape clause" (Section 4(3)) allows temporary deviation from targets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5: QUICK QUIZ
+       Logic in js/quiz.js
+       ============================================================ -->
+  <section id="quiz" aria-labelledby="quiz-title">
+    <div class="section-container">
+
+      <div class="section-header reveal" style="text-align:center">
+        <div class="section-eyebrow" style="justify-content:center">
+          <span class="eyebrow-pill">🧠 Knowledge Check</span>
+        </div>
+        <h2 class="section-title" id="quiz-title" style="text-align:center">
+          Test Your Understanding
+        </h2>
+        <p class="section-description" style="margin:0 auto">
+          7 questions covering CPI, inflation types, monetary policy, budget terminology,
+          and more. Each question has a detailed explanation to reinforce learning.
+        </p>
+      </div>
+
+      <!-- Quiz container — managed by quiz.js -->
+      <div class="quiz-container reveal" id="quizContainer">
+        <!-- Dynamically rendered by quiz.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-logo-icon">₹</span>
+          Arth<span>Shastra</span>
+        </div>
+        <p class="footer-tagline">India's Economy. Clearly Explained.</p>
+        <p class="footer-note">
+          An educational resource for Class 11–12 Economics students and UPSC Civil Services aspirants.
+          All data sourced from MoSPI, RBI, Ministry of Finance, and publicly available government reports.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <div class="fl-group">
+          <h5>Sections</h5>
+          <a href="#cpi">CPI &amp; Inflation</a>
+          <a href="#calculator">CPI Calculator</a>
+          <a href="#fuel">Fuel Impact Analysis</a>
+          <a href="#budget">Union Budget</a>
+          <a href="#quiz">Knowledge Quiz</a>
+        </div>
+        <div class="fl-group">
+          <h5>Key Concepts</h5>
+          <a href="#cpi">Demand-Pull Inflation</a>
+          <a href="#cpi">Cost-Push Inflation</a>
+          <a href="#fuel">Repo Rate</a>
+          <a href="#budget">Fiscal Deficit</a>
+          <a href="#budget">FRBM Act</a>
+        </div>
+        <div class="fl-group">
+          <h5>Data Sources</h5>
+          <a href="https://mospi.gov.in" target="_blank" rel="noopener">MoSPI</a>
+          <a href="https://rbi.org.in" target="_blank" rel="noopener">Reserve Bank of India</a>
+          <a href="https://indiabudget.gov.in" target="_blank" rel="noopener">India Budget Portal</a>
+          <a href="https://pib.gov.in" target="_blank" rel="noopener">PIB India</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 ArthShastra — Built for educational purposes. Not financial advice.</p>
+      <p>Data is indicative and sourced from public government documents.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       SCRIPTS (order matters: main → calculator → quiz)
+       ============================================================ -->
+  <script src="js/main.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/quiz.js"></script>
+
+</body>
+</html>

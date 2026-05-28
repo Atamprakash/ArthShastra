@@ -1,0 +1,268 @@
+/* =============================================================
+   responsive.css — ArthShastra
+   Media queries: Mobile-first breakpoints
+   xs: 0–480px | sm: 481–768px | md: 769–1024px | lg: 1025px+
+   ============================================================= */
+
+/* ---------------------------------------------------------------
+   TABLET & BELOW  (≤1024px)
+--------------------------------------------------------------- */
+@media (max-width: 1024px) {
+
+  /* Navbar */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero stat badges — hide side badges, keep bottom */
+  .stat-badge--1,
+  .stat-badge--2 { display: none; }
+  .stat-badge--3 {
+    position: static;
+    transform: none;
+    margin: 24px auto 0;
+    display: inline-flex;
+  }
+  .hero-stats {
+    position: static;
+    display: flex; justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  /* CPI calculator layout → stacked */
+  .calc-layout {
+    grid-template-columns: 1fr;
+  }
+  .calc-result-panel {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .gauge-wrapper { grid-column: 1 / -1; }
+
+  /* Budget layout → stacked */
+  .budget-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer layout → stacked */
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------
+   SMALL TABLET & LARGE MOBILE  (≤768px)
+--------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+  /* Root tweaks */
+  :root {
+    --section-pad-y: 72px;
+  }
+
+  /* Section containers */
+  .section-container { padding: var(--section-pad-y) 20px; }
+
+  /* Section headers */
+  .section-title { letter-spacing: -0.8px; }
+  .section-header { margin-bottom: 40px; }
+
+  /* Hero */
+  #hero { padding: 100px 20px 60px; }
+  .hero-title { letter-spacing: -1.5px; }
+  .hero-subtitle { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 320px; justify-content: center; }
+  .hero-chips { justify-content: center; }
+
+  /* Concept cards */
+  .concept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Basket section */
+  .basket-section { padding: 24px 20px; }
+
+  /* Types grid */
+  .types-grid { grid-template-columns: 1fr; }
+
+  /* Calculator */
+  .calc-result-panel {
+    grid-template-columns: 1fr;
+  }
+  .calc-inputs-panel { padding: 20px 16px; }
+  .calc-panel-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* Calc rows — tighter on mobile */
+  .calc-row {
+    grid-template-columns: 24px 1fr;
+    grid-template-rows: auto auto;
+  }
+  .cr-controls {
+    grid-column: 1 / -1;
+    min-width: unset; width: 100%;
+    flex-direction: row; align-items: center;
+  }
+  .cr-slider-wrap { flex: 1; }
+
+  /* Data banner → 2 cols */
+  .data-banner {
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .db-divider { display: none; }
+  .db-item { border-bottom: 1px solid var(--lt-border); }
+  .db-item:nth-child(odd) { border-right: 1px solid var(--lt-border); }
+
+  /* Timeline */
+  .timeline { padding-left: 40px; }
+  .ts-node {
+    left: -32px;
+    width: 40px; height: 40px;
+    font-size: 1.1rem;
+  }
+  .timeline-line { left: 14px; }
+  .ts-card { padding: 18px 16px; }
+  .ts-card h4 { font-size: 1.05rem; }
+
+  /* Glossary */
+  .glossary-strip { padding: 20px; }
+  .gs-items { grid-template-columns: 1fr; }
+
+  /* Budget components */
+  .budget-components { gap: 14px; }
+  .bc-card { padding: 20px 18px; }
+  .bc-sources { grid-template-columns: 1fr; }
+
+  /* Fiscal metrics */
+  .fm-item { padding: 14px 16px; }
+  .fm-value { font-size: 1.5rem; }
+
+  /* Highlight box */
+  .highlight-box { flex-direction: column; padding: 20px; }
+
+  /* Quiz */
+  .quiz-card { padding: 24px 18px; }
+  .qz-question { font-size: 1.15rem; }
+  .score-actions { flex-direction: column; align-items: center; }
+  .btn-retry,
+  .btn-review-link { width: 100%; max-width: 300px; justify-content: center; }
+
+  /* Footer */
+  .footer-links {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .footer-bottom {
+    flex-direction: column; gap: 4px; text-align: center;
+  }
+}
+
+/* ---------------------------------------------------------------
+   MOBILE  (≤480px)
+--------------------------------------------------------------- */
+@media (max-width: 480px) {
+
+  :root { --section-pad-y: 56px; }
+
+  /* Nav */
+  .nav-container { padding: 0 16px; }
+  .nav-logo { font-size: 1.1rem; }
+
+  /* Hero title */
+  .hero-title { letter-spacing: -1px; line-height: 1.08; }
+  .hero-eyebrow { font-size: 0.68rem; }
+  .hero-chips { gap: 6px; }
+  .chip { font-size: 0.7rem; padding: 5px 11px; }
+
+  /* Section eyebrow */
+  .eyebrow-pill { font-size: 0.7rem; padding: 5px 12px; }
+
+  /* Concept cards */
+  .concept-card { padding: 22px 18px; }
+  .cc-title { font-size: 1.15rem; }
+
+  /* Calculator */
+  .cr-icon { display: none; }
+  .calc-row { grid-template-columns: 1fr; }
+  .calc-explainer { flex-direction: column; }
+
+  /* Data banner → full width single col */
+  .data-banner {
+    grid-template-columns: 1fr;
+  }
+  .db-item:nth-child(odd) { border-right: none; }
+  .db-item { border-bottom: 1px solid var(--lt-border); }
+  .db-item:last-child { border-bottom: none; }
+  .db-value { font-size: 1.8rem; }
+
+  /* Timeline */
+  .timeline { padding-left: 32px; }
+  .ts-node {
+    left: -24px;
+    width: 34px; height: 34px;
+    font-size: 0.95rem;
+  }
+  .timeline-line { left: 10px; }
+
+  /* Quiz */
+  .qz-dot { width: 7px; height: 7px; }
+  .qz-question { font-size: 1rem; }
+  .qz-option { padding: 12px 14px; font-size: 0.84rem; }
+
+  /* Footer */
+  .footer-links { grid-template-columns: 1fr; }
+  .footer-logo { font-size: 1.3rem; }
+
+  /* Budget */
+  .bc-header { flex-direction: column; gap: 8px; }
+  .budget-donut-card { padding: 20px 16px; }
+  .donut-chart-svg { width: 150px; }
+}
+
+/* ---------------------------------------------------------------
+   LARGE DESKTOP  (≥1400px)
+--------------------------------------------------------------- */
+@media (min-width: 1400px) {
+  :root { --container-max: 1320px; }
+
+  .hero-title { letter-spacing: -3px; }
+  .section-title { letter-spacing: -2px; }
+
+  /* Calc layout — give result panel more room */
+  .calc-layout {
+    grid-template-columns: 1fr 440px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   PRINT STYLES
+--------------------------------------------------------------- */
+@media print {
+  #loader,
+  #navbar,
+  #particleCanvas,
+  .hero-scroll-hint,
+  .hero-actions,
+  .hero-chips,
+  .hero-stats { display: none !important; }
+
+  body { background: white; color: black; font-size: 12pt; }
+
+  section { break-inside: avoid; page-break-inside: avoid; }
+
+  .reveal { opacity: 1; transform: none; }
+
+  .section-title, .hero-title {
+    -webkit-text-fill-color: black;
+    color: black;
+  }
+
+  a { color: black; text-decoration: underline; }
+
+  .btn, .btn-qz-next, .btn-retry, .btn-review-link { display: none; }
+}

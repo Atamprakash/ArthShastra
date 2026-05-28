@@ -1,0 +1,297 @@
+/* =============================================================
+   animations.css — ArthShastra
+   All @keyframes, animation utilities, and micro-interaction styles
+   ============================================================= */
+
+/* ---------------------------------------------------------------
+   KEYFRAMES
+--------------------------------------------------------------- */
+
+/* Loader spinner */
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+/* Loader progress bar */
+@keyframes loaderFill {
+  0%   { width: 0%; }
+  60%  { width: 80%; }
+  100% { width: 100%; }
+}
+
+/* Hero / Section entry */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Floating animation for stat badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Glow pulse for hero background orbs */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.08); }
+}
+
+/* Scroll mouse wheel bob */
+@keyframes scrollBob {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50%       { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* Card icon wobble */
+@keyframes iconWobble {
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+  50%       { transform: rotate(4deg) scale(1.08); }
+}
+
+/* Score/trophy bounce */
+@keyframes popBounce {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(5deg); opacity: 1; }
+  80%  { transform: scale(0.95) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Bar width fill (used by weight bars and fiscal bars) */
+@keyframes barGrow {
+  from { width: 0 !important; }
+  to   { width: var(--target-width, 100%); }
+}
+
+/* Shimmer effect (skeleton loading) */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+/* Number count-up (used in gauge) */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Ripple on button click */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Pulse ring (used around active elements) */
+@keyframes pulseRing {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255,107,43,0.4); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 12px rgba(255,107,43,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255,107,43,0); }
+}
+
+/* Gradient text shift */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Notification slide-in */
+@keyframes slideInRight {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(120%); opacity: 0; }
+}
+
+/* Timeline node pop */
+@keyframes nodePop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Particle drift (subtle, for canvas particles) */
+@keyframes particleDrift {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(40px); opacity: 0; }
+}
+
+/* Gauge needle swing */
+@keyframes needleSwing {
+  0%   { transform: rotate(-90deg); }
+  100% { transform: rotate(var(--needle-deg, 0deg)); }
+}
+
+/* ---------------------------------------------------------------
+   ANIMATION UTILITY CLASSES
+--------------------------------------------------------------- */
+
+/* Entrance animations */
+.anim-fade-up    { animation: fadeUp   0.7s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+.anim-fade-in    { animation: fadeIn   0.5s ease both; }
+.anim-fade-left  { animation: fadeLeft 0.7s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+.anim-pop-bounce { animation: popBounce 0.7s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* Delay helpers */
+.anim-delay-100 { animation-delay: 0.1s; }
+.anim-delay-200 { animation-delay: 0.2s; }
+.anim-delay-300 { animation-delay: 0.3s; }
+.anim-delay-400 { animation-delay: 0.4s; }
+.anim-delay-500 { animation-delay: 0.5s; }
+.anim-delay-600 { animation-delay: 0.6s; }
+.anim-delay-700 { animation-delay: 0.7s; }
+.anim-delay-800 { animation-delay: 0.8s; }
+
+/* Float continuous */
+.anim-float { animation: float 6s ease-in-out infinite; }
+.anim-float-slow { animation: float 9s ease-in-out infinite; }
+
+/* Pulse ring */
+.anim-pulse-ring { animation: pulseRing 2s ease-out infinite; }
+
+/* Icon wobble */
+.anim-icon-wobble { animation: iconWobble 3s ease-in-out infinite; }
+
+/* Gradient animate */
+.anim-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+/* ---------------------------------------------------------------
+   HOVER MICRO-INTERACTIONS
+   Applied globally to interactive elements
+--------------------------------------------------------------- */
+
+/* Card lift on hover */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+}
+
+/* Subtle translate-right on hover */
+.hover-right {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hover-right:hover { transform: translateX(6px); }
+
+/* Scale on hover */
+.hover-scale {
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hover-scale:hover { transform: scale(1.06); }
+
+/* Glow on hover */
+.hover-glow-saffron {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-saffron:hover {
+  box-shadow: 0 0 30px rgba(255,107,43,0.35);
+}
+
+/* ---------------------------------------------------------------
+   TRANSITION SHIMMER (loading skeleton pattern)
+--------------------------------------------------------------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.1)  50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------
+   BUTTON RIPPLE EFFECT
+   Add via JS: element.classList.add('ripple-host')
+--------------------------------------------------------------- */
+.ripple-host { position: relative; overflow: hidden; }
+
+.ripple-host .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.25);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out forwards;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+/* ---------------------------------------------------------------
+   SCROLL-TRIGGERED BAR ANIMATION
+   Bars that animate width when .visible class is added
+--------------------------------------------------------------- */
+.wr-bar,
+.fm-bar,
+.cb-bar {
+  transform-origin: left center;
+}
+
+/* When the parent .reveal becomes .visible, bars animate */
+.reveal.visible .wr-bar {
+  animation: barGrow 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+}
+
+.reveal.visible .fm-bar {
+  animation: barGrow 1s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+}
+
+/* ---------------------------------------------------------------
+   STAGGERED CHILDREN (for lists that animate in sequence)
+--------------------------------------------------------------- */
+.stagger-children > *:nth-child(1)  { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2)  { animation-delay: 0.10s; }
+.stagger-children > *:nth-child(3)  { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4)  { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(5)  { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6)  { animation-delay: 0.30s; }
+.stagger-children > *:nth-child(7)  { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8)  { animation-delay: 0.40s; }
+
+/* ---------------------------------------------------------------
+   PAGE TRANSITION (fade sections on route change if needed)
+--------------------------------------------------------------- */
+.page-fade-enter {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* ---------------------------------------------------------------
+   REDUCE MOTION (accessibility)
+--------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
